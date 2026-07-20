@@ -1,80 +1,49 @@
-// ==========================
-// Navbar muda ao rolar
-// ==========================
-
-const header = document.querySelector("header");
-
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 50) {
-        header.style.background = "#000";
-        header.style.boxShadow = "0 5px 20px rgba(255,0,0,.3)";
-    } else {
-        header.style.background = "rgba(0,0,0,.85)";
-        header.style.boxShadow = "0 5px 20px rgba(255,0,0,.15)";
-    }
-});
-
-// ==========================
+// ===========================
 // Botões Comprar
-// ==========================
+// ===========================
 
-const botoes = document.querySelectorAll(".comprar");
+let botoes = document.getElementsByClassName("comprar");
 
-botoes.forEach(botao => {
+for (let i = 0; i < botoes.length; i++) {
 
-    botao.addEventListener("click", () => {
-
+    botoes[i].onclick = function () {
         alert("Produto adicionado ao carrinho!");
+    };
+}
 
-    });
+// ===========================
+// Formulário de Contato
+// ===========================
 
-});
+let formulario = document.getElementById("contact-form");
 
-// ==========================
-// Formulário
-// ==========================
+formulario.onsubmit = function (event) {
 
-const formulario = document.getElementById("contact-form");
+    event.preventDefault();
 
-formulario.addEventListener("submit", function(e){
+    let nome = document.getElementsByTagName("input")[0].value;
+    let email = document.getElementsByTagName("input")[1].value;
+    let mensagem = document.getElementsByTagName("textarea")[0].value;
 
-    e.preventDefault();
-
-    const nome = formulario.querySelector("input[type='text']").value;
-    const email = formulario.querySelector("input[type='email']").value;
-    const mensagem = formulario.querySelector("textarea").value;
-
-    if(nome === "" || email === "" || mensagem === ""){
-
+    if (nome == "" || email == "" || mensagem == "") {
         alert("Preencha todos os campos.");
+    } else {
+        alert("Mensagem enviada com sucesso!");
 
-        return;
+        formulario.reset();
     }
+};
 
-    alert("Mensagem enviada com sucesso!");
+// ===========================
+// Mudar a cor da Navbar
+// ===========================
 
-    formulario.reset();
+window.onscroll = function () {
+    let header = document.querySelector("header");
 
-});
-
-// ==========================
-// Rolagem suave
-// ==========================
-
-const links = document.querySelectorAll("a[href^='#']");
-
-links.forEach(link => {
-
-    link.addEventListener("click", function(e){
-
-        e.preventDefault();
-
-        const destino = document.querySelector(this.getAttribute("href"));
-
-        destino.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    });
-
-});
+    if (window.scrollY > 50) {
+        header.style.backgroundColor = "black";
+    } else {
+        header.style.backgroundColor = "rgba(0,0,0,0.85)";
+    }
+};
