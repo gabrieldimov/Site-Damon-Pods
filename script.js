@@ -1,38 +1,111 @@
 // ===========================
-// Botões Comprar
+// Botões Comprar e Carrinho
 // ===========================
 
-let botoes = document.getElementsByClassName("comprar");
+const cart = [];
+const carroCount = document.getElementById("cart-count");
+const cartItemsContainer = document.querySelector(".cart-items");
+const emptyCartMessage = document.querySelector(".empty-cart");
+const limparCarrinhoBtn = document.getElementById("limpar-carrinho");
+const finalizarCompraBtn = document.getElementById("finalizar-compra");
 
-for (let i = 0; i < botoes.length; i++) {
+function updateCartDisplay() {
+    if (carroCount) {
+        carroCount.textContent = cart.length;
+    }
 
-    botoes[i].onclick = function () {
-        alert("Produto adicionado ao carrinho!");
-    };
+    if (!emptyCartMessage || !cartItemsContainer) return;
+
+    if (cart.length === 0) {
+        emptyCartMessage.style.display = "block";
+        cartItemsContainer.innerHTML = "";
+        return;
+    }
+
+    emptyCartMessage.style.display = "none";
+    cartItemsContainer.innerHTML = cart
+        .map(
+            (item, index) =>
+                `<li class="cart-item"><span>${item.title}</span><button type="button" data-index="${index}" class="remove-item">Remover</button></li>`
+        )
+        .join("");
+
+    const removeButtons = document.querySelectorAll(".remove-item");
+    removeButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            cart.splice(Number(this.dataset.index), 1);
+            updateCartDisplay();
+        });
+    });
 }
+
+function addToCart(event) {
+    const button = event.currentTarget;
+    const product = button.closest(".product");
+    const titleElement = product?.querySelector("h3");
+    const title = titleElement?.textContent?.trim() || "Produto";
+
+    cart.push({ title });
+    updateCartDisplay();
+}
+
+function initCart() {
+    const botoes = document.querySelectorAll(".comprar");
+
+    botoes.forEach((botao) => {
+        botao.addEventListener("click", addToCart);
+    });
+
+    if (limparCarrinhoBtn) {
+        limparCarrinhoBtn.addEventListener("click", function () {
+            if (cart.length === 0) {
+                alert("Carrinho já está vazio.");
+                return;
+            }
+            cart.length = 0;
+            updateCartDisplay();
+        });
+    }
+
+    if (finalizarCompraBtn) {
+        finalizarCompraBtn.addEventListener("click", function () {
+            if (cart.length === 0) {
+                alert("Adicione um produto antes de finalizar.");
+                return;
+            }
+            alert("Compra finalizada com sucesso!");
+            cart.length = 0;
+            updateCartDisplay();
+        });
+    }
+
+    updateCartDisplay();
+}
+
+document.addEventListener("DOMContentLoaded", initCart);
 
 // ===========================
 // Formulário de Contato
 // ===========================
 
-let formulario = document.getElementById("contact-form");
+const formulario = document.getElementById("contact-form");
 
-formulario.onsubmit = function (event) {
+if (formulario) {
+    formulario.onsubmit = function (event) {
+        event.preventDefault();
 
-    event.preventDefault();
+        const nome = formulario.querySelector("input[type='text']")?.value.trim() || "";
+        const email = formulario.querySelector("input[type='email']")?.value.trim() || "";
+        const mensagem = formulario.querySelector("textarea")?.value.trim() || "";
 
-    let nome = document.getElementsByTagName("input")[0].value;
-    let email = document.getElementsByTagName("input")[1].value;
-    let mensagem = document.getElementsByTagName("textarea")[0].value;
-
-    if (nome == "" || email == "" || mensagem == "") {
-        alert("Preencha todos os campos.");
-    } else {
-        alert("Mensagem enviada com sucesso!");
-
-        formulario.reset();
-    }
-};
+        if (nome === "" || email === "" || mensagem === "") {
+            alert("Preencha todos os campos.");
+        } else {
+            alert("Mensagem enviada com sucesso!");
+            formulario.reset();
+        }
+    };
+}
 
 // ===========================
 // Mudar a cor da Navbar

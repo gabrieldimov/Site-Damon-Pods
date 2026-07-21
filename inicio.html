@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,20 +11,27 @@
 
 <body>
 
+    <input type="checkbox" id="menu-toggle" hidden>
+    <label for="menu-toggle" class="hamburger" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </label>
+
     <header>
         <nav class="navbar">
 
             <a href="#home" class="logo">
-                <img src="/imagens/Logo.png" alt="Damon PODS">
+                <img src="imagens/Logo.png" alt="Damon PODS">
             </a>
 
             <ul class="nav-links">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#product">Produtos</a></li>
+                <li><a href="#cart">Carrinho (<span id="cart-count">0</span>)</a></li>
                 <li><a href="#contact">Contato</a></li>
                 <li><a href="login.html">Login</a></li>
             </ul>
-
         </nav>
     </header>
 
@@ -45,9 +53,7 @@
                 <a href="#product" class="btn">
                     Comprar Agora
                 </a>
-
             </div>
-
         </section>
 
         <!-- Produtos -->
@@ -58,49 +64,63 @@
             <div class="product-container">
 
                 <div class="product">
-                    <img src="/imagens/produto1.jpg" alt="Produto 1">
+                    <img src="imagens/WhatsApp Image 2026-07-07 at 14.43.08.jpeg" alt="Produto 1">
                     <h3>Produto 1</h3>
                     <p>Descrição do Produto 1.</p>
                     <button class="comprar">Comprar</button>
                 </div>
 
                 <div class="product">
-                    <img src="/imagens/produto2.jpg" alt="Produto 2">
+                    <img src="imagens/WhatsApp Image 2026-07-07 at 14.43.28.jpeg" alt="Produto 2">
                     <h3>Produto 2</h3>
                     <p>Descrição do Produto 2.</p>
                     <button class="comprar">Comprar</button>
                 </div>
 
                 <div class="product">
-                    <img src="/imagens/produto3.jpg" alt="Produto 3">
+                    <img src="imagens/WhatsApp Image 2026-07-07 at 14.43.43.jpeg" alt="Produto 3">
                     <h3>Produto 3</h3>
                     <p>Descrição do Produto 3.</p>
                     <button class="comprar">Comprar</button>
                 </div>
 
                 <div class="product">
-                    <img src="/imagens/produto4.jpg" alt="Produto 4">
+                    <img src="imagens/WhatsApp Image 2026-07-07 at 14.19.03.jpeg" alt="Produto 4">
                     <h3>Produto 4</h3>
                     <p>Descrição do Produto 4.</p>
                     <button class="comprar">Comprar</button>
                 </div>
 
                 <div class="product">
-                    <img src="/imagens/produto5.jpg" alt="Produto 5">
+                    <img src="imagens/WhatsApp Image 2026-07-07 at 14.23.17.jpeg" alt="Produto 5">
                     <h3>Produto 5</h3>
                     <p>Descrição do Produto 5.</p>
                     <button class="comprar">Comprar</button>
                 </div>
 
                 <div class="product">
-                    <img src="/imagens/produto6.jpg" alt="Produto 6">
+                    <img src="imagens/WhatsApp Image 2026-07-07 at 14.19.32.jpeg" alt="Produto 6">
                     <h3>Produto 6</h3>
                     <p>Descrição do Produto 6.</p>
                     <button class="comprar">Comprar</button>
                 </div>
+            </div>
+        </section>
 
+        <!-- Carrinho -->
+        <section id="cart" class="cart-section">
+
+            <h2>Meu Carrinho</h2>
+
+            <div class="cart-content">
+                <p class="empty-cart">Seu carrinho está vazio.</p>
+                <ul class="cart-items"></ul>
             </div>
 
+            <div class="cart-actions">
+                <button id="limpar-carrinho" class="btn secondary" type="button">Limpar carrinho</button>
+                <button id="finalizar-compra" class="btn" type="button">Finalizar compra</button>
+            </div>
         </section>
 
         <!-- Contato -->
@@ -119,11 +139,8 @@
                 <button type="submit">
                     Enviar
                 </button>
-
             </form>
-
         </section>
-
     </main>
 
     <!-- Rodapé -->
@@ -134,4 +151,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
